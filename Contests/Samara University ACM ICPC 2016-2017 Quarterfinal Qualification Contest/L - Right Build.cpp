@@ -2,8 +2,8 @@
 using namespace std;
 struct node{
 	int v,next;
-}p[555555],pf[555555];
-int vis[222222],head[222222],headf[555555],cnt,cntf,u,v,n,m,a,b,i;
+}p[222222],pf[222222];
+int vis[222222],head[222222],headf[222222],cnt,cntf,u,v,n,m,a,b,i;
 long long dis[3][222222],ans=0x3f3f3f3f;
 void add(int u,int v){
 	p[cnt].v=v,p[cnt].next=head[u],head[u]=cnt++;
