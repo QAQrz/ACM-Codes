@@ -1,7 +1,7 @@
 # ACM-Codes
 Some codes of ACM-Online Judge(Algorithm)
 
-一些各大OJ的算法题的代码
+一些各大OJ和比赛的算法题的代码……
 
 - SDUTOJ
 - POJ
@@ -9,4 +9,6 @@ Some codes of ACM-Online Judge(Algorithm)
 - HDU
 - BestCoder
 - UVALive
+- Some Contests
 - ……
+
