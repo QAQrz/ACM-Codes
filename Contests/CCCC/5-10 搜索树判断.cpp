@@ -6,10 +6,9 @@ struct node{
 	node(){
 		l=r=NULL;
 	}
-};
-int n,a[1024],i,cnt,cnt1,num;
-node *rt,*rt1;
-node *insert(node *p,int x){
+}*rt,*rt1;
+int n,a[1024],i,cnt1,cnt2,num;
+node* insert(node *p,int x){
 	if(!p){
 		p=new node;
 		p->x=x;
@@ -21,32 +20,30 @@ node *insert(node *p,int x){
 		p->r=insert(p->r,x);
 	return p;
 }
-node *insert1(node *p,int x){
+node* insert1(node *p,int x){
 	if(!p){
 		p=new node;
 		p->x=x;
 		return p;
 	}
-	if(x>=p->x)
-		p->l=insert1(p->l,x);
-	else
+	if(x<p->x)
 		p->r=insert1(p->r,x);
+	else
+		p->l=insert1(p->l,x);
 	return p;
 }
 int check(node *p){
 	if(!p)
 		return 1;
-	if(p->x!=a[cnt])
+	if(p->x!=a[cnt1++])
 		return 0;
-	cnt++;
 	return check(p->l)&&check(p->r);
 }
 int check1(node *p){
 	if(!p)
 		return 1;
-	if(p->x!=a[cnt1])
+	if(p->x!=a[cnt2++])
 		return 0;
-	cnt1++;
 	return check1(p->l)&&check1(p->r);
 }
 void print(node *p){
@@ -54,7 +51,7 @@ void print(node *p){
 		return;
 	print(p->l);
 	print(p->r);
-	printf("%d%c",p->x,num++<n-1?' ':'\n');
+	printf("%d%c",p->x,++num<n?' ':'\n');
 }
 int main(){
 	cin>>n;
