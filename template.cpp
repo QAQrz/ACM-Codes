@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define debug(x) cout<<(x)<<endl
+#define db(x) cout<<(x)<<endl
 typedef long long LL;
 
 int main(){
