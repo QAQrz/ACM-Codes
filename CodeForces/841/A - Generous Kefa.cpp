@@ -6,9 +6,13 @@ using namespace std;
 #define ms(x,y) memset(x,y,sizeof x)
 typedef long long LL;
 const LL mod=1e9+7,inf=0x3f3f3f3f,maxn=1123456;
-
+int a[26],n,k,maxi;
+char s[128];
 int main(){
-	ios::sync_with_stdio(0);
-	
+	ios::sync_with_stdio(false);
+	cin>>n>>k>>s;
+	for(int i=0;i<n;i++)
+		a[s[i]-'a']++,maxi=max(maxi,a[s[i]-'a']);
+	db(maxi>k?"NO":"YES");
 	return 0;
 }
