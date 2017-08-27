@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+#pragma comment(linker,"/stack:1024000000,1024000000")
 #define db(x) cout<<(x)<<endl
 #define pf(x) push_front(x)
 #define pb(x) push_back(x)
