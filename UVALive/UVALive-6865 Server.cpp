@@ -10,11 +10,21 @@ using namespace std;
 #define ms(x,y) memset(x,y,sizeof x)
 typedef long long LL;
 const double pi=acos(-1),eps=1e-9;
-const LL inf=0x3f3f3f3f,mod=1e9+7,maxn=1123456;
-
+const LL inf=0x3f3f3f3f,mod=1e9+7,maxn=112;
+int n,t,a,ans,flag;
 int main(){
 	ios::sync_with_stdio(0);
 	cin.tie(0);
-	
+	while(cin>>n>>t){
+		ans=flag=0;
+		for(int i=0;i<n;i++){
+			cin>>a;
+			if(t>=a&&!flag)
+				t-=a,ans++;
+			else
+				flag=1;
+		}
+		db(ans);
+	}
 	return 0;
 }

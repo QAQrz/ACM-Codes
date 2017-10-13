@@ -11,10 +11,25 @@ using namespace std;
 typedef long long LL;
 const double pi=acos(-1),eps=1e-9;
 const LL inf=0x3f3f3f3f,mod=1e9+7,maxn=1123456;
-
+int x,ans;
+char s[11];
 int main(){
 	ios::sync_with_stdio(0);
 	cin.tie(0);
-	
+	cin>>x>>s>>s;
+	if(s[0]=='w'){
+		if(x==5||x==6)
+			db(53);
+		else
+			db(52);
+	}
+	else{
+		if(x<30)
+			db(12);
+		else if(x<31)
+			db(11);
+		else
+			db(7);
+	}
 	return 0;
 }

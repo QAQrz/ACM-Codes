@@ -1,6 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
+#pragma comment(linker,"/stack:1024000000,1024000000")
 #define db(x) cout<<(x)<<endl
+#define pc(x) putchar(x)
+#define ps(x) puts(x)
 #define pf(x) push_front(x)
 #define pb(x) push_back(x)
 #define mp(x,y) make_pair(x,y)
@@ -9,19 +12,19 @@ typedef long long LL;
 const double pi=acos(-1),eps=1e-9;
 const LL inf=0x3f3f3f3f,mod=1e9+7,maxn=1123456,maxc=128;
 struct acam{
-	// maxn:character total length
-	// maxc:character set size
+	// maxn: character total length
+	// maxc: character set size
 	int nt[maxn][maxc],flag[maxn],fail[maxn],rt,cnt;
-	void init(){
+	inline void init(){
 		rt=cnt=0;
 		ms(nt,0);
 		ms(flag,0);
 		ms(fail,0);
 	}
-	int toid(char c){
-		// transform character
+	inline int toid(char c){
+		// transform character(from 0)
 	}
-	void insert(char *s){
+	inline void insert(char *s){
 		int st=rt;
 		while(*s){
 			if(!nt[st][toid(*s)])
@@ -30,7 +33,7 @@ struct acam{
 		}
 		// update flag
 	}
-	void build(){
+	inline void build(){
 		queue<int>q;
 		q.push(rt);
 		while(q.size()){
@@ -45,7 +48,7 @@ struct acam{
 					nt[st][i]=st==rt?rt:nt[fail[st]][i];
 		}
 	}
-	int cal(char *s){
+	inline int match(char *s){
 		int st=rt,tmp;
 		while(*s){
 			tmp=st=nt[st][toid(*s++)];
@@ -55,9 +58,11 @@ struct acam{
 		}
 		// return something
 	}
-};
+}acam;
+
 int main(){
 	ios::sync_with_stdio(0);
-
+	cin.tie(0);
+	
 	return 0;
 }
