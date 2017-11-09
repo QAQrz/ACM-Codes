@@ -10,15 +10,19 @@ using namespace std;
 #define ms(x,y) memset(x,y,sizeof x)
 typedef long long LL;
 const double pi=acos(-1),eps=1e-9;
-const LL inf=0x3f3f3f3f,mod=1e9+7,maxn=251234,maxc=33;
+const LL inf=0x3f3f3f3f,mod=1e9+7,maxn=112345,maxc=33;
 struct sam{
 	// maxn: character total length + number of strings
 	// maxc: character set size
-	int nt[maxn*2][maxc],len[maxn*2]={0},link[maxn*2],rt,last,cnt,cur,p,q,c,k[maxn*2],a[maxn*2]={0},ans[maxn*2]={0},b[maxn*2]={0};
+	int nt[maxn*2][maxc],len[maxn*2],link[maxn*2],rt,last,cnt,cur,p,q,c,k[maxn*2],b[maxn*2];
+	LL a[maxn*2];
 	inline void init(){
 		rt=last=cnt=0;
 		ms(nt,-1);
+		ms(len,0);
 		ms(link,-1);
+		ms(a,0);
+		ms(b,0);
 	}
 	inline int toid(char c){
 		// transform character(from 1)
@@ -45,38 +49,45 @@ struct sam{
 		last=cur;
 	}
 	inline void insert(char *s){
+		int l=strlen(s);
 		while(*s)
 			extend(toid(*s++));
-	}
-	inline void match(char *s){
-		int v=0;
-		while(*s)
-			v=nt[v][toid(*s++)],a[v]++;
-	}
-	inline void cal(int l){
 		for(int i=0;i<=cnt;i++)
 			b[len[i]]++;
 		for(int i=1;i<=l;i++)
 			b[i]+=b[i-1];
 		for(int i=0;i<=cnt;i++)
-			k[--b[len[i]]]=i;
-		for(int i=cnt;~i;i--){
-			ans[len[k[i]]]=max(ans[len[k[i]]],a[k[i]]);
-			if(~link[k[i]])
-				a[link[k[i]]]+=a[k[i]];
+			k[--b[len[i]]]=i,a[i]=1;
+		for(int i=cnt;~i;i--)
+			for(int j=0;j<maxc;j++)
+				if(~nt[k[i]][j])
+					a[k[i]]+=a[nt[k[i]][j]];
+	}
+	inline void cal(LL x){
+		int v=0;
+		while(x){
+			for(int i=0;i<maxc;i++)
+				if(~nt[v][i]&&x>a[nt[v][i]])
+					x-=a[nt[v][i]];
+				else if(~nt[v][i]){
+					printf("%c",i+'a'-1);
+					x--,v=nt[v][i];
+					break;
+				}
 		}
-		for(int i=l-1;i;i--)
-			ans[i]=max(ans[i],ans[i+1]);
-		for(int i=1;i<=l;i++)
-			printf("%d\n",ans[i]);
+		printf("\n");
 	}
 }sam;
+int t;
+LL x;
 char s[maxn];
 int main(){
-	scanf("%s",s);
+	scanf("%s %d",s,&t);
 	sam.init();
 	sam.insert(s);
-	sam.match(s);
-	sam.cal(strlen(s));
+	while(t--){
+		scanf("%lld",&x);
+		sam.cal(x);
+	}
 	return 0;
 }

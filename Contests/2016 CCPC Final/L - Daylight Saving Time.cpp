@@ -11,17 +11,14 @@ using namespace std;
 typedef long long LL;
 const double pi=acos(-1),eps=1e-9;
 const LL inf=0x3f3f3f3f,mod=1e9+7,maxn=1123456;
-
 int week[2111][15][33];
 int nth[2111][15][33];
 pair<int, int> p1[2111], p2[2111];
 int days[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
 bool IsLeap(int y) {
 	if((y%4==0 && y%100!=0) || y%400==0) return true;
 	else return false;
 }
-
 void Init() {
 	week[2007][1][1] = 0;
 	int cnt = -1;
@@ -43,18 +40,15 @@ void Init() {
 		}
 	}
 }
-
 int Hash(int mo, int d, int h, int mi, int s) {
 	int tmpd = mo*32 + d;
 	int tmps = h*3600 + mi*60  + s;
 	return tmpd*3600*24 + tmps;
 }
-
 int main(){
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 	Init();
-	// printf("%d  %d\n", nth[2016][3][13], week[2016][3][13]);
 	int t, y, mo, d, h, mi, s;
 	scanf("%d", &t);
 	for(int cs=1; cs<=t; ++cs) {
@@ -63,13 +57,11 @@ int main(){
 		int p1d = p1[y].second;
 		int p2m = p2[y].first;
 		int p2d = p2[y].second;
-		// printf("%d %d | %d %d\n", p1m, p1d, p2m, p2d);
 		int time1 = Hash(p1m, p1d, 2, 0, 0);
 		int time2 = Hash(p1m, p1d, 3, 0, 0);
 		int time3 = Hash(p2m, p2d, 1, 0, 0);
 		int time4 = Hash(p2m, p2d, 2, 0, 0);
 		int tm = Hash(mo, d, h, mi, s);
-		// printf("%d  %d %d %d %d\n", tm, time1, time2, time3, time4);
 		printf("Case #%d: ", cs);
 		if(tm < time1) printf("PST\n");
 		else if(tm>=time1 && tm<time2) printf("Neither\n");
@@ -77,6 +69,5 @@ int main(){
 		else if(tm>=time3 && tm<time4) printf("Both\n");
 		else printf("PST\n");
 	}
-	
 	return 0;
 }

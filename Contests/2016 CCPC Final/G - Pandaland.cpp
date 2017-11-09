@@ -48,8 +48,6 @@ inline int spfa(int s,int t){
 	return dis[t];
 }
 int main(){
-	// ios::sync_with_stdio(0);
-	// cin.tie(0);
 	int t, m, x1, y1, x2, y2, w;
 	scanf("%d", &t);
 	for(int cs=1; cs<=t; ++cs) {

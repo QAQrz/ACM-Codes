@@ -4,19 +4,15 @@
 #include <map>
 #include <vector>
 using namespace std;
-
 int t, n, m, num, val;
 int dp[11][1<<10];
 vector<int> a[11], c[11], d[11];
-
 inline bool Check(int idx, map<int, bool> &mp) {
 	for(int i=0; i<c[idx].size(); ++i) {
 		if(!mp[c[idx][i]]) return false;
 	}
-
 	return true;
 }
-
 void DFS(int idx, int begin, int st, map<int, bool> mp, map<int, bool> &mp_dest, int cur) {
 	if(cur == 3) return;
 	for(int i=begin; i<=m; ++i) {
@@ -37,7 +33,6 @@ void DFS(int idx, int begin, int st, map<int, bool> mp, map<int, bool> &mp_dest,
 		}
 	}
 }
-
 void Init() {
 	map<int, bool> mp_empty;
 	for(int i=1; i<=n; ++i) {
@@ -49,7 +44,6 @@ void Init() {
 		DFS(i, 1, 0, mp_empty, mp_dest, 0);
 	}
 }
-
 int main(int argc, char const *argv[]) {
 	scanf("%d", &t);
 	for(int cs=1; cs<=t; ++cs) {
@@ -83,6 +77,5 @@ int main(int argc, char const *argv[]) {
 		}
 		printf("Case #%d: %d\n", cs, dp[n][(1<<m)-1]);
 	}
-	
 	return 0;
 }
