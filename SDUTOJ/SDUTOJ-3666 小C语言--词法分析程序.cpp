@@ -1,68 +1,39 @@
 #include <bits/stdc++.h>
 using namespace std;
-void check(char *s){
-	if (!strcmp(s,"main")||!strcmp(s,"if")||!strcmp(s,"else")||!strcmp(s,"for")||!strcmp(s,"while")||!strcmp(s,"int"))
-		printf("(keyword,%s)\n",s);
-	else
-		printf("(identifier,%s)\n",s);
-}
-void print(char s)
-{
-	if (s=='{'||s=='}'||s=='('||s==')'||s==','||s==';')
-		printf("(boundary,%c)\n",s);
-	else
-		printf("(operator,%c)\n",s);
-}
-int main()
-{
-	char s[10028],a[10028],b[10028];
-	int l,t,i,t2;
-	while(~scanf("%s",s))
-	{
-		t=t2=0;
-		l=(int)strlen(s);
-		for (i=0; i<l; i++)
-		{
-			if (isalpha(s[i])||s[i]=='_')
-				a[t++]=s[i];
-			else if (isdigit(s[i]))
-			{
-				if (t)
-					a[t++]=s[i];
-				else
-					b[t2++]=s[i];
+int t;
+char s[2048],ans[2048];
+map<char,int>op;
+map<char,int>bound;
+map<string,int>key;
+int main(){
+	op['=']=op['+']=op['-']=op['*']=op['/']=op['<']=op['>']=op['!']=1;
+	bound['{']=bound['}']=bound['(']=bound[')']=bound[',']=bound[';']=1;
+	key["main"]=key["if"]=key["else"]=key["for"]=key["while"]=key["int"]=1;
+	while(cin>>s)
+		for(int i=0;s[i];i++)
+			if(isalpha(s[i])||s[i]=='_'){
+				t=0;
+				while(isalpha(s[i])||isdigit(s[i])||s[i]=='_')
+					ans[t++]=s[i++];
+				ans[t]=0,i--;
+				printf("(%s,%s)\n",key[ans]?"keyword":"identifier",ans);
 			}
-			else
-			{
-				if (t)
-				{
-					t=a[t]=0;
-					check(a);
-				}
-				if (t2)
-				{
-					t2=b[t2]=0;
-					printf("(integer,%s)\n",b);
-				}
-				if ((s[i]=='<'||s[i]=='>'||s[i]=='='||s[i]=='!')&&s[i+1]=='=')
-				{
+			else if(isdigit(s[i])){
+				t=0;
+				while(isdigit(s[i]))
+					ans[t++]=s[i++];
+				ans[t]=0,i--;
+				printf("(integer,%s)\n",ans);
+			}
+			else if(bound[s[i]])
+				printf("(boundary,%c)\n",s[i]);
+			else if(op[s[i]]){
+				if((s[i]=='<'||s[i]=='>'||s[i]=='='||s[i]=='!')&&s[i+1]=='='){
 					printf("(operator,%c%c)\n",s[i],s[i+1]);
 					i++;
 				}
 				else
-					print(s[i]);
+					printf("(operator,%c)\n",s[i]);
 			}
-		}
-		if (t)
-		{
-			t=a[t]=0;
-			check(a);
-		}
-		if (t2)
-		{
-			t2=b[t2]=0;
-			printf("(integer,%s)\n",b);
-		}
-	}
 	return 0;
 }
